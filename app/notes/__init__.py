@@ -27,17 +27,14 @@ def validate_user(view):
 @bp.route('/index', methods=['GET', 'POST'])
 def index():
 	''' Index page on website. Displays login or user posts '''
-	username = ""
-	notes = None
-	if g.user:
-		page = request.args.get('page', 1, type=int)
-		username = g.user.username
-		notes = Note.query.filter_by(userId = g.user.id).order_by(Note.created.desc()).paginate(page,
-			5, False)
-		next_url = url_for('main.index', page=notes.next_num) if notes.has_next else None
-		prev_url = url_for('main.index', page=notes.prev_num) if notes.has_prev else None
+	page = request.args.get('page', 1, type=int)
+	# If user is not logged in then give non-existing userId to query to return empty pagination object.
+	notes = Note.query.filter_by(userId = g.user.id if g.user else -1).order_by(Note.created.desc()).paginate(page,
+		5, False)
+	next_url = url_for('main.index', page=notes.next_num) if notes.has_next else None
+	prev_url = url_for('main.index', page=notes.prev_num) if notes.has_prev else None
 
-	return render_template('notes/index.html', title='index', username=username, notes=notes.items, next_url=next_url, prev_url=prev_url)
+	return render_template('notes/index.html', title='index', notes=none if not notes else notes.items, next_url=next_url, prev_url=prev_url)
 
 @bp.route('/newnote', methods=['GET', 'POST'])
 @login_required
@@ -45,7 +42,7 @@ def new_note():
 	''' Allows logged-in user to create and save a new note.'''
 	form = NoteForm()
 	if request.method=='POST' and form.validate():
-		note = Note.create(title = form.title.data, body = orm.body.data, user = g.user)
+		note = Note.create(title = form.title.data, body = form.body.data, user = g.user)
 		flash("Note created.")
 		return redirect(url_for('main.view', id=note.id))
 
@@ -57,7 +54,6 @@ def new_note():
 @validate_user
 def view(id, note):
 	''' View a note and its details. '''
-	# Validate note exists and belongs to user
 	return render_template('notes/view.html', title = note.title, note = note)
 
 
@@ -66,10 +62,7 @@ def view(id, note):
 @validate_user
 def update(id, note):
 	''' update note ID'''
-	#note = Note.query.filter_by(id=id).first_or_404()
-	
 	form = NoteForm()
-
 
 	if request.method=='POST' and form.validate():
 		note.title = form.title.data
@@ -81,9 +74,8 @@ def update(id, note):
 	elif request.method =='GET':
 		form.title.data = note.title
 		form.body.data = note.body
-
-
 	return render_template('notes/newnote.html', title = 'Update', form = form)
+
 
 @bp.route('/delete/<int:id>', methods=['GET'])
 @login_required
@@ -94,6 +86,4 @@ def deletePost(id, note):
 		db.session.delete(note)
 		db.session.commit()
 		flash("Note deleted successfully.")
-
-
 	return redirect(url_for('main.index'))

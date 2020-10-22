@@ -47,7 +47,6 @@ def register():
 	form = RegistrationForm()
 
 	if request.method=='POST' and form.validate():
-		print("Register")
 		user = User.create(username=form.username.data, email=form.email.data)
 		user.setPassword(form.password.data)
 		db.session.commit()
