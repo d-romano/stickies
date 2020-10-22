@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<main class='view'>
+	<div class='note-view'>
+		<h1 class='note-view-title'>
+			{{ note.title }}
+		</h1>
+	</div>
+	<br>
+	{% if note.modified %}
+	<div class='note-modified-date'>
+		Updated: {{ note.modified.strftime("%d %b %y %I:%M%p")}}
+	</div>
+	{% endif %}
+	<div class='note-create-date'>
+		Posted: {{ note.created.strftime("%d %b %y %I:%M%p")}}
+	</div>
+	<hr>
+	<div class='note-author'>
+		Posted by: {{note.user.username}}
+		{% if g.user.id == note.userId %}
+		<a href="{{ url_for('main.update', id=note.id) }}">Edit</a>
+		<a href="{{ url_for('main.deletePost', id=note.id) }}">Delete</a>
+		{% endif %}
+	</div>
+	<hr>
+	<div class='note-content'>
+		{{ note.body}}
+	</div>	
+</main>
+{% endblock %}

@@ -13,7 +13,7 @@
 	<ul class='nav'>
 		{% if not g.user %}
 		<li class='nav'><a href="{{ url_for('auth.login') }}">Login</a>
-		<li class='nav'><a href="{{ url_for('auth.login') }}">Register</a>
+		<li class='nav'><a href="{{ url_for('auth.register') }}">Register</a>
 		{% else %}
 		<li class='nav'><a href="{{ url_for('auth.logout') }}">Logout</a>
 		{% endif %}

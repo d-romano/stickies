@@ -73,6 +73,10 @@ class Note(BaseMixin, db.Model):
 		db.DateTime(),
 		default=datetime.utcnow()
 	)
+	modified = db.Column(
+		db.DateTime(),
+		nullable=True
+	)
 	userId = db.Column(
 		db.Integer(),
 		db.ForeignKey('user.id'),
