@@ -4,13 +4,15 @@ from datetime import datetime
 from werkzeug.security import check_password_hash, generate_password_hash
 
 class BaseMixin(object):
-	""" Handles adding objects to db and commiting """
+	""" Handles common functions shared between models. """
 	@classmethod
 	def create(cls, **kw):
+		""" Adds a record into table that calls function """
 		obj = cls(**kw)
 		db.session.add(obj)
 		db.session.commit()
 		return obj
+
 
 class User(BaseMixin, db.Model):
 	""" Model for users """

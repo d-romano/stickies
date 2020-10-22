@@ -1,0 +1,9 @@
+<table valign='top'>
+
+	<td><h3><a href="{{ url_for('main.view', id=note.id) }}">{{ note.title }}</a></h3> 
+	<i>posted: {{ note.created.strftime('%m/%d/%y @ %H:%M') }}</i>
+	<br>
+	{{ note.body }}
+	</td>
+	
+</table>

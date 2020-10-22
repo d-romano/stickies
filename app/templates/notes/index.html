@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+	{% if g.user %}
+	<h1> Welcome {{ username }}!</h1><br>
+		{% if not notes %}
+			<p> You have no notes. Why not <a href="{{ url_for('main.new_note') }}">make one?</a></p>
+			
+		{% else %}
+			{% for note in notes %}
+				{% include 'notes/_notes.html' %}
+			{% endfor %}
+		{% endif %}
+	{% else %}
+	<h1> GET OUT OF HERE, PAYING CUSTOMERS ONLY!</h1>
+	{% endif %}
+{% endblock %}

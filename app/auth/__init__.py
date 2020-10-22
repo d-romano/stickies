@@ -5,7 +5,7 @@ from app.models import User
 from app.auth.forms import LoginForm, RegistrationForm
 
 from functools import wraps
-
+from datetime import datetime
 
 bp = Blueprint('auth', __name__)
 
@@ -15,6 +15,7 @@ def login_required(view):
 	@wraps(view)
 	def wrapped_view(*args, **kwargs):
 		if not g.user:
+			flash("You must be logged in to view this page.")
 			return redirect((url_for('auth.login')))
 		return view(*args, **kwargs)
 	return wrapped_view
@@ -30,15 +31,14 @@ def login():
 		user = User.query.filter_by(email=form.email.data).first()
 
 		if not user or not user.checkPassword(form.password.data):
-			print("No user")
 			flash('Email/Password incorrect. Try again.')
 			return redirect(url_for('auth.login'))
 		else:
 			session.clear()
 			session['id'] = user.id
+			session.permanent = form.remember.data
 			flash("Login successful")
-			return redirect(url_for('auth.login'))
-	#print(get_flashed_messages())
+			return redirect(url_for('main.index'))
 	return render_template('auth/login.html', title='login', form=form)
 
 
@@ -56,7 +56,12 @@ def register():
 	return render_template('auth/register.html', title='Register', form=form)
 
 
-
+@bp.route('/logout', methods=['GET'])
+def logout():
+	session.clear()
+	g.user = None
+	flash("Logout successful.")
+	return redirect(url_for('auth.login'))
 
 
 @bp.before_app_request

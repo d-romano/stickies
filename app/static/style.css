@@ -1,0 +1,44 @@
+nav { 
+	background: lightgray; 
+	display: flex; 
+	align-items: center; 
+	padding: 0 0.5rem; 
+}
+
+nav h1{
+	flex:auto; margin:0;
+}
+
+nav ul{ 
+	display: flex; 
+	list-style: none; 
+	margin: 0; 
+	padding: 0; 
+}
+
+nav ul li a, nav ul li span, header .action { 
+	text-decoration: none;
+	display: block; 
+	padding: 0.5rem; 
+}	
+
+table td{ 
+	border-top: 1px solid #c9c9c9;
+}
+
+table td:hover{
+	background-color:#c9c9c9;
+	border-radius: 5px;
+}
+
+table td h3{ 
+	display:inline-block;
+}
+
+table td i { 
+	font-size:12px;
+}
+
+a{
+	text-decoration: none;
+}

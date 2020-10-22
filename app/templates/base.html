@@ -2,13 +2,30 @@
 
 {% block title %}<title>{% if title %}{{ title }}{% endif %} - Stickies </title>{% endblock %}
 
+{% block style %}
+<link rel='stylesheet' href="{{ url_for('static', filename='style.css') }}">
+{% endblock %}
 
+
+{% block nav %}
+<nav class='top nav'>
+	<h1><a href="{{ url_for('main.index') }}">Stickies</a></h1>
+	<ul class='nav'>
+		{% if not g.user %}
+		<li class='nav'><a href="{{ url_for('auth.login') }}">Login</a>
+		<li class='nav'><a href="{{ url_for('auth.login') }}">Register</a>
+		{% else %}
+		<li class='nav'><a href="{{ url_for('auth.logout') }}">Logout</a>
+		{% endif %}
+</nav>
+{% endblock %}
+<br>
 <div class='container'>
 	<header>
 		{% block header %}{% endblock %}
 	</header>
 	{% with messages = get_flashed_messages() %}
-	{% for messages in messages %}
+	{% for message in messages %}
 		<div class='alert alert-info' role='alert'>{{ message }}</div>
 	{% endfor %}
 	{% endwith %}
