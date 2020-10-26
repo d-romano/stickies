@@ -1,5 +1,5 @@
 <!doctype html>
-
+<html>
 {% block title %}<title>{% if title %}{{ title }}{% endif %} - Stickies </title>{% endblock %}
 
 {% block style %}
@@ -7,27 +7,53 @@
 {% endblock %}
 
 
-{% block nav %}
-<nav class='top nav'>
-	<h1><a href="{{ url_for('main.index') }}">Stickies</a></h1>
-	<ul class='nav'>
-		{% if not g.user %}
-		<li class='nav'><a href="{{ url_for('auth.login') }}">Login</a>
-		<li class='nav'><a href="{{ url_for('auth.register') }}">Register</a>
-		{% else %}
-		<li class='nav'><a href="{{ url_for('auth.logout') }}">Logout</a>
-		{% endif %}
-</nav>
-{% endblock %}
-<br>
-<div class='container'>
-	<header>
-		{% block header %}{% endblock %}
-	</header>
-	{% with messages = get_flashed_messages() %}
-	{% for message in messages %}
-		<div class='alert alert-info' role='alert'>{{ message }}</div>
-	{% endfor %}
-	{% endwith %}
-	{% block content %}{% endblock %}
-</div>
+<body class='main'>
+	{% block nav %}
+	
+	<nav class='navbar'>
+		<a class='navbar-title' href="{{ url_for('main.index') }}">Stickies</a>
+		<div clas='navbar-pages'>
+			<ul class='navbar-menu'>
+				<li class='navbar-option'>
+					<a class='navbar-link' href="{{ url_for('main.index') }}">Home</a>
+				</li>
+				{% if g.user %}
+				<li class='navbar-option'>
+					<a class='navbar-link' href="{{ url_for('main.new_note') }}">New</a>
+				</li>
+				{% endif %}
+			</ul>
+		</div>
+		<ul class='navbar-menu mg-left d-flex'>
+			{% if not g.user %}
+			<li class='navbar-option'>
+				<a class='navbar-link' href="{{ url_for('auth.login') }}">Login</a>
+			</li>
+			<li class='navbar-option'>
+				<a class='navbar-link' href="{{ url_for('auth.register') }}">Register</a>
+			</li>
+			{% else %}
+			<li class='navbar-option'>
+				<a class='navbar-link' href="{{ url_for('auth.logout') }}">Logout</a>
+			</li>
+			{% endif %}
+		</ul>
+	</nav>
+
+	{% endblock %}
+
+	<br>
+
+	<div class='container'>
+		<header>
+			{% block header %}{% endblock %}
+		</header>
+		{% with messages = get_flashed_messages() %}
+		{% for message in messages %}
+			<div class='alert alert-dark' role='alert'>{{ message }}</div>
+		{% endfor %}
+		{% endwith %}
+		{% block content %}{% endblock %}
+	</div>
+</li>
+</html>

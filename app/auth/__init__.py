@@ -37,7 +37,7 @@ def login():
 			session.clear()
 			session['id'] = user.id
 			session.permanent = form.remember.data
-			flash("Login successful")
+			flash("Welcome g.user.username!")
 			return redirect(url_for('main.index'))
 	return render_template('auth/login.html', title='login', form=form)
 

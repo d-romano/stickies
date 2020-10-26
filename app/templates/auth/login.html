@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
+	<h2>{{ title.upper() }}</h2>
+	<hr>
 	<form action='' method='post'>
 		{{ form.hidden_tag() }}
 		<div class='input'>

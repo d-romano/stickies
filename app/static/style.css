@@ -1,44 +1,153 @@
-nav { 
-	background: lightgray; 
-	display: flex; 
-	align-items: center; 
-	padding: 0 0.5rem; 
+/* Style for core html elements. */
+body {
+	/* Set elements against the edge. */
+	margin: 0;
+	background-color: #222831 !important;
+	/* Set the font-size, width and line spacing */
+	font-size: 1rem;
+	font-weight: 400;
+	font-family: Arial, Helvetica, sans-serif;;
+	color: #eeeeee;
+	line-height: 1.5;
+	text-align: left;
 }
 
-nav h1{
-	flex:auto; margin:0;
+div {
+	display:block;
 }
 
-nav ul{ 
-	display: flex; 
-	list-style: none; 
-	margin: 0; 
-	padding: 0; 
-}
 
-nav ul li a, nav ul li span, header .action { 
-	text-decoration: none;
-	display: block; 
-	padding: 0.5rem; 
-}	
-
-table td{ 
-	border-top: 1px solid #c9c9c9;
-}
-
-table td:hover{
-	background-color:#c9c9c9;
-	border-radius: 5px;
-}
-
-table td h3{ 
-	display:inline-block;
-}
-
-table td i { 
-	font-size:12px;
-}
+nav{ display: block; }
 
 a{
 	text-decoration: none;
+	background-color: transparent;
+	text-decoration-color: initial;	
 }
+
+a:visited{
+	color: inherit;
+}
+
+a:hover{
+	color:#d65a31;
+}
+
+ul{
+	display: block;
+}
+
+h1, h2, h3{
+	color:#d65a31;
+}
+
+/* Style based classes. */
+
+.d-flex{
+	display: flex;
+}
+
+.mg-left{
+	margin-left: auto;
+}
+
+
+/* Style for the navbar. */
+.navbar-container{}
+
+.navbar{
+	background-color: #393e46;
+	position: relative;
+	display: flex;
+	flex-flow: row nowrap;
+	align-items: center;
+	padding: .5rem 1rem;
+	justify-content: flex-start;
+}
+
+.navbar-menu {
+	display: flex;
+	padding-left: 0;
+	margin-bottom: 0;
+	list-style: none;
+}
+
+.navbar-title{
+	display: inline-block;
+/*	padding-top: .3125rem;
+	padding-bottom: .3125rem; */
+	margin-right: 1rem;
+	font-size: 1.25rem;
+	line-height: inherit;
+	white-space: nowrap;
+}
+
+.navbar-pages{
+	display:flex;
+	align-items: center;
+}
+
+.navbar-link{
+	display: block;
+	padding: .5rem 1rem;
+
+}
+
+
+
+/* Style for website notifications */
+div .alert{
+	position: relative;
+	border: 1px solid transparent;
+	border-radius: .25rem;
+	padding: .75rem 1.25rem;
+	margin-bottom: 1rem;
+}
+
+div .alert-dark{
+	background-color: #343a40;
+	color: #cac7c2;
+}
+
+.container{
+	margin: auto;
+	width: 50%;,
+	border: 2px solid white ;  	
+}
+
+
+/* Style for pagination nav-bar. */
+.page-bar{
+	position: relative;
+	display: flex;
+	flex-flow: row nowrap;
+	padding: .5rem 1rem
+}
+
+.pager{
+	padding-left: 0;
+	margin: 20px 0;
+	text-align: center;
+	list-style: none;
+	position: fixed;
+	left: 50%
+}
+
+.pager li{
+	display: inline;
+}
+
+.pager li > a, .pager li > span{
+	background-color: inherit;
+	color: inherit;
+	display: inline-block;
+	padding: 5px 14px;
+	border: 1px solid #ffffff;
+	border-radius: 15px;
+}
+
+
+.pager.disabled>a{
+	cursor: not-allowed;
+}
+/* Style for user notes here */
