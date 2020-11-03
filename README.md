@@ -1,7 +1,7 @@
 # Stickies
 A Practice web-application that allows users to save notes. 
 
-The aim of the project is an introduction into web development and familiarizingmyself with utilizing frameworks and databases into applications.
+The aim of the project is an introduction into web development and familiarizing myself with utilizing frameworks and databases into applications.
 
 Planned features are:
 
